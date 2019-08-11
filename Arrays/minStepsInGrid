@@ -1,0 +1,78 @@
+//import "fmt"
+func coverPoints(A []int , B []int )  (int) {
+   count := 0
+   i := A[0]; j := B[0]
+   for p:=1;p<len(A);p++{
+       ln := A[p]; rn := B[p]
+
+       if ln > i {
+          // fmt.Println("i,j")
+            stepI := ln - i
+            stepJ := minus(j-rn)
+        //    fmt.Println("stepJ", stepI, stepJ, i, j, ln, rn)
+            if stepI < stepJ {
+               i = ln
+               if rn > j{
+                  j +=stepI
+                } else {
+                  j -=stepI
+                }
+              //  fmt.Println("P", j, stepI)
+                count += stepI + (minus(rn-j))
+                j = rn
+            //    fmt.Println("$", count)
+            } else{
+                j = rn
+                if ln > i{
+                    i+=stepJ
+                }else{
+                    i-=stepJ
+                }
+                count += stepJ + (minus(ln-i))
+                i = ln
+            }
+
+       } else {
+            stepI :=i-ln
+            stepJ := minus(j-rn)
+           //  fmt.Println("stepI", stepI, stepJ, i, j, ln, rn)
+            if stepI < stepJ {
+               i = ln
+               if rn > j{
+                  j +=stepI
+                } else {
+                  j -=stepI
+                }
+                count += stepI + (minus(rn-j))
+                j = rn
+            } else{
+                j = rn
+            //    fmt.Println("**", j)
+                if ln > i{
+                    i+=stepJ
+                }else{
+                    i-=stepJ
+                }
+                count += stepJ + (minus(ln-i))
+                i = ln
+            }
+
+       }
+       //fmt.Println(">",count)
+       //fmt.Println(i, j)
+
+
+}
+
+//fmt.Println(">>",count)
+return count
+
+}
+
+func minus(a int) int{
+  //  fmt.Println("**",a)
+    if a>0 {
+        return a
+    }
+    return -1*a
+}
